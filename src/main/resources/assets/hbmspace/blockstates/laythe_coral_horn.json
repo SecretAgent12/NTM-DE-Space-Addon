@@ -1,0 +1,8 @@
+{
+  "neoforge:definition_type": "hbm:baked",
+  "variants": {
+    "": {
+      "model": "hbm:block/backport_placeholder"
+    }
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "parent": "hbmspace:block/celestial_ore",
+  "textures": {
+    "overlay": "hbmspace:block/cluster_iron",
+    "stone": "hbmspace:block/dresbase"
+  },
+  "render_type": "minecraft:cutout"
+}

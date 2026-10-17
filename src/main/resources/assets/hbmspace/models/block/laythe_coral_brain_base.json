@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/block",
+  "textures": {
+    "coral": "hbmspace:block/laythe_coral.brain",
+    "particle": "hbmspace:block/laythe_coral.brain"
+  },
+  "render_type": "minecraft:cutout"
+}

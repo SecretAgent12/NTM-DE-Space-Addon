@@ -1,0 +1,9 @@
+com.hbmspace.blockentity.machine.BlockEntityHydroponic fertilizer int
+com.hbmspace.blockentity.machine.BlockEntityHydroponic power long
+com.hbmspace.blockentity.machine.BlockEntityMachineCryoDistill power long
+com.hbmspace.blockentity.machine.BlockEntityMachineMilkReformer power long
+com.hbmspace.blockentity.machine.BlockEntityMachineVacuumCircuit consumption long
+com.hbmspace.blockentity.machine.BlockEntityMachineVacuumCircuit maxPower long
+com.hbmspace.blockentity.machine.BlockEntityMachineVacuumCircuit power long
+com.hbmspace.blockentity.machine.BlockEntityMachineVacuumCircuit processTime int
+com.hbmspace.blockentity.machine.BlockEntityMachineVacuumCircuit progress int

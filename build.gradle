@@ -1,0 +1,197 @@
+// Build script of NTM DE: Space, the official addon of NTM: Decentralized Edition (SecretAgent12).
+// Based on the core's build.gradle (ModDevGradle); the core comes in as a finished jar from its own project.
+import java.util.zip.ZipFile
+
+plugins {
+    id 'java-library'
+    id 'idea'
+    id 'net.neoforged.moddev' version '2.0.146'
+}
+
+version = mod_version
+group = mod_group_id
+
+base {
+    archivesName = "ntm-de-space-neoforge-${minecraft_version}"
+}
+
+java.toolchain.languageVersion = JavaLanguageVersion.of(21)
+
+// The core jar: build it first in the core project (gradlew build); this addon compiles and runs against it.
+def deJar = file("${de_project}/build/libs/ntm-decentralized-neoforge-${minecraft_version}-${de_version}.jar")
+if (!deJar.isFile()) {
+    throw new GradleException("NTM: DE jar not found: ${deJar}. Build the core first, or set de_project/de_version.")
+}
+
+// The core's access transformer and injected interfaces are needed to compile against it, like the
+// upstream addon takes them out of the NTM jar.
+def deAccess = file("${rootProject.projectDir}/.gradle-de")
+deAccess.mkdirs()
+new ZipFile(deJar).withCloseable { jar ->
+    ['META-INF/accesstransformer.cfg', 'interface-injection.json'].each { entry ->
+        def e = jar.getEntry(entry)
+        if (e == null) throw new GradleException("${entry} missing in ${deJar}")
+        new File(deAccess, entry.substring(entry.lastIndexOf('/') + 1)).bytes = jar.getInputStream(e).bytes
+    }
+}
+
+repositories {
+    mavenCentral()
+    // Flywheel 1.0.x and Ponder, as in the core
+    maven {
+        url 'https://maven.createmod.net/'
+        content {
+            includeGroup 'dev.engine-room.flywheel'
+            includeGroup 'net.createmod.ponder'
+        }
+    }
+    maven { url = 'https://raw.githubusercontent.com/Fuzss/modresources/main/maven/' }
+    exclusiveContent {
+        forRepository {
+            maven { url = 'https://maven.ryanhcode.dev/releases' }
+        }
+        filter { includeGroup 'dev.ryanhcode.sable-companion' }
+    }
+    exclusiveContent {
+        forRepository {
+            maven {
+                name = 'Modrinth'
+                url = 'https://api.modrinth.com/maven'
+            }
+        }
+        filter { includeGroup 'maven.modrinth' }
+    }
+    exclusiveContent {
+        forRepository {
+            maven { url 'https://cursemaven.com' }
+        }
+        filter { includeGroup 'curse.maven' }
+    }
+}
+
+neoForge {
+    version = project.neo_version
+
+    // own AT (META-INF/accesstransformer.cfg, if the addon ever needs one) is picked up automatically
+    accessTransformers.from(file("${deAccess}/accesstransformer.cfg"))
+    interfaceInjectionData.from(file("${deAccess}/interface-injection.json"))
+
+    runs {
+        client {
+            client()
+        }
+        server {
+            server()
+            programArgument '--nogui'
+            gameDirectory = project.file('runs/server')
+        }
+        configureEach {
+            systemProperty 'forge.logging.markers', 'REGISTRIES'
+            logLevel = org.slf4j.event.Level.INFO
+            // the core's SIMD kernels (see com.hbm.lib.internal.VectorApi in the core)
+            jvmArgument '--add-modules=jdk.incubator.vector'
+        }
+    }
+
+    mods {
+        "${mod_id}" {
+            sourceSet(sourceSets.main)
+        }
+    }
+}
+
+sourceSets.main {
+    resources.exclude('assets/**/*.obj')
+}
+
+dependencies {
+    // NTM: Decentralized Edition: compiled against and loaded in dev runs as a mod jar
+    implementation files(deJar)
+    // what the core bundles (Jar-in-Jar) is not unpacked in dev runs, so it comes in directly
+    implementation "dev.engine-room.flywheel:flywheel-neoforge-${minecraft_version}:${flywheel_version}"
+    compileOnly "dev.engine-room.flywheel:flywheel-neoforge-api-${minecraft_version}:${flywheel_version}"
+    runtimeOnly "net.createmod.ponder:ponder-neoforge:1.0.82+mc1.21.1"
+    runtimeOnly "dev.ryanhcode.sable-companion:sable-companion-common-1.21.1:1.6.0"
+    compileOnly "org.jspecify:jspecify:1.0.0"
+    // CC: Tweaked for 1.21.1 NeoForge: the addon's peripherals (com.hbmspace.compat.computercraft), as in the core
+    implementation "maven.modrinth:gu7yAYhd:1ewzHZYg"
+    // JEI, as in the core: the addon's recipe pages go through the core's integration
+    implementation "curse.maven:jei-238222:8964989"
+    // Dev runs get one of two stacks, as in the core (gradle.properties: dev_stack): Sable 2.x refuses to
+    // start next to ScalableLux, so they can't share a run. Neither ends up in the jar or our dependencies.
+    if (project.findProperty('dev_stack') == 'scalablelux') {
+        runtimeOnly "maven.modrinth:Ps1zyz6x:9KuFoPhC"                  // ScalableLux 0.3.0-alpha.0.8
+    } else if (project.findProperty('dev_stack') != 'none') {
+        // Create: Aeronautics stack; the core's Sable compat (sub-levels) is in the core jar
+        runtimeOnly "curse.maven:create-328085:7963363"              // Create 6.0.10
+        runtimeOnly "curse.maven:sable-1312371:8673825"              // Sable 2.0.5 (NeoForge)
+        runtimeOnly "curse.maven:create-aeronautics-676721:8763471"  // Create Aeronautics 1.3.2
+    }
+    // spark profiler in dev runs (/spark profiler, /spark tickmonitor; thread dumps of a hung server)
+    if (project.findProperty('dev_spark') != 'false') {
+        runtimeOnly "maven.modrinth:l6YH9Als:v5qtqRQi"                  // spark 1.10.124 (NeoForge 1.21.1)
+    }
+}
+
+// Sodium for dev runs goes into run/mods like a normal install (see the core's build.gradle for why)
+configurations {
+    devModSodium { transitive = false }
+}
+dependencies {
+    devModSodium "maven.modrinth:AANobbMI:uMOpc5uV"                  // Sodium 0.8.13 for 1.21.1 NeoForge
+}
+tasks.register('syncDevMods') {
+    def modsDir = file('run/mods')
+    def sodium = project.findProperty('dev_sodium') != 'false'
+    inputs.files(configurations.devModSodium)
+    doLast {
+        modsDir.mkdirs()
+        configurations.devModSodium.each { jar ->
+            def target = new File(modsDir, jar.name)
+            if (sodium) {
+                if (!target.exists()) java.nio.file.Files.copy(jar.toPath(), target.toPath())
+            } else {
+                target.delete()
+            }
+        }
+    }
+}
+tasks.matching { it.name == 'runClient' || it.name == 'prepareClientRun' }.configureEach { dependsOn 'syncDevMods' }
+
+// The versions go into neoforge.mods.toml as text, as in the core
+tasks.named('processResources') {
+    def props = [mod_version: project.mod_version, de_version: project.de_version]
+    inputs.properties props
+    filesMatching('META-INF/neoforge.mods.toml') {
+        filter { String line -> line.replace('${mod_version}', props.mod_version).replace('${de_version}', props.de_version) }
+    }
+}
+
+tasks.withType(JavaCompile).configureEach {
+    options.encoding = 'UTF-8'
+    options.compilerArgs += ['--add-modules=jdk.incubator.vector',
+                             '--add-exports=java.base/jdk.internal.misc=ALL-UNNAMED']
+    if (project.hasProperty('allErrors')) options.compilerArgs += ['-Xmaxerrs', '100000']
+    options.fork = true
+    options.forkOptions.memoryMaximumSize = '3g'
+}
+
+tasks.named('jar') {
+    exclude('assets/**/*.obj')
+    manifest.attributes(
+            'Implementation-Title': 'NTM DE: Space (NTM: Space for NTM: Decentralized Edition)',
+            'Implementation-Version': project.version,
+            'Implementation-Vendor': 'SecretAgent12')
+    from(rootProject.file('LICENSE'))
+    from(rootProject.file('LICENSE.LESSER'))
+    from(rootProject.file('THIRD_PARTY_NOTICES'))
+    from(rootProject.file('NOTICE.md'))
+    from(rootProject.file('LICENSES')) { into 'LICENSES' }
+}
+
+idea {
+    module {
+        downloadSources = true
+        downloadJavadoc = true
+    }
+}

@@ -1,0 +1,14 @@
+{
+  "values": [
+    "hbmspace:duna_polar",
+    "hbmspace:duna_polar_hills",
+    "hbmspace:minmus_basins",
+    "hbmspace:minmus_hills"
+  ],
+  "effects": {
+    "fog_color": 12638463,
+    "water_color": 4159204,
+    "water_fog_color": 329011,
+    "sky_color": 7907327
+  }
+}

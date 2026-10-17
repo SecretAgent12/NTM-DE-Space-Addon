@@ -1,0 +1,32 @@
+{
+  "attributes": {
+    "minecraft:audio/ambient_sounds": {
+      "mood": {
+        "block_search_extent": 8,
+        "offset": 2.0,
+        "sound": "minecraft:ambient.cave",
+        "tick_delay": 6000
+      }
+    },
+    "minecraft:audio/background_music": {
+      "creative": {
+        "max_delay": 24000,
+        "min_delay": 12000,
+        "sound": "hbmspace:music.game.space"
+      },
+      "default": {
+        "max_delay": 24000,
+        "min_delay": 12000,
+        "sound": "hbmspace:music.game.space"
+      }
+    },
+    "minecraft:visual/ambient_light_color": "#0a0a0a",
+    "minecraft:visual/cloud_color": "#ccffffff"
+  },
+  "default_clock": "hbmspace:eve",
+  "timelines": [
+    "hbmspace:eve_day",
+    "hbmspace:eve_villager_schedule"
+  ],
+  "has_ender_dragon_fight": false
+}

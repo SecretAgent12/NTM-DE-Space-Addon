@@ -1,0 +1,6 @@
+{
+  "type": "hbm:spaceship",
+  "biomes": "#hbmspace:is_celestial",
+  "spawn_overrides": {},
+  "step": "strongholds"
+}

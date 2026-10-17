@@ -1,0 +1,8 @@
+{
+  "parent": "hbmspace:block/celestial_ore",
+  "textures": {
+    "overlay": "hbmspace:block/ore_oil_empty",
+    "stone": "hbmspace:block/eve_stone_2"
+  },
+  "render_type": "minecraft:cutout"
+}

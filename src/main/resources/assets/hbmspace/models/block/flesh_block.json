@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/snow_height2",
+  "textures": {
+    "particle": "hbmspace:block/meltedflesh",
+    "texture": "hbmspace:block/meltedflesh"
+  },
+  "render_type": "minecraft:translucent"
+}

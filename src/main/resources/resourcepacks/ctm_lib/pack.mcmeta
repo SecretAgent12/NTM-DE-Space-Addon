@@ -1,0 +1,11 @@
+{
+  "pack": {
+    "description": {
+      "translate": "pack.hbm.ctm",
+      "with": [
+        "CTM Lib"
+      ]
+    },
+    "pack_format": 34
+  }
+}

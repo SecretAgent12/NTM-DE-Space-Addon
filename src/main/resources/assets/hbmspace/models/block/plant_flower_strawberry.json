@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cross",
+  "textures": {
+    "cross": "hbmspace:block/plant_flower.strawberry"
+  },
+  "render_type": "minecraft:cutout"
+}

@@ -1,0 +1,11 @@
+{
+  "pack": {
+    "description": {
+      "translate": "pack.hbm.ctm",
+      "with": [
+        "Fusion"
+      ]
+    },
+    "pack_format": 34
+  }
+}

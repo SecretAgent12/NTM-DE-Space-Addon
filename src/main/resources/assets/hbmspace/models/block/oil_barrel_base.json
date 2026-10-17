@@ -1,0 +1,9 @@
+{
+  "parent": "minecraft:block/block",
+  "ambientocclusion": false,
+  "textures": {
+    "all": "hbmspace:block/barrel_oily",
+    "particle": "hbmspace:block/barrel_oily"
+  },
+  "render_type": "minecraft:cutout"
+}

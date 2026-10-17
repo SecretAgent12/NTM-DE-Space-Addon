@@ -1,0 +1,30 @@
+# Gradle / IDE
+.gradle/
+build/
+out/
+run/
+runs/
+.idea/
+*.iml
+*.ipr
+*.iws
+.vscode/
+bin/
+
+# backport delivery scratch
+_package/
+_updates/
+
+# local helpers (not part of the mod)
+/apply-updates.bat
+/apply-updates.ps1
+/setup.ps1
+/tools/
+.gradle-de/
+upstream/
+
+# reference jars (ntm-next 1.0.2), not part of the source
+/ref/
+
+# local logs
+*.log

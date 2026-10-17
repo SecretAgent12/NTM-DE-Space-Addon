@@ -1,0 +1,75 @@
+{
+  "carvers": {},
+  "creature_spawn_probability": 0.1,
+  "downfall": 0.2,
+  "effects": {
+    "water_color": 1441930,
+    "music": {
+      "sound": "hbmspace:music.game.space",
+      "min_delay": 12000,
+      "max_delay": 24000,
+      "replace_current_music": false
+    },
+    "mood_sound": {
+      "sound": "minecraft:ambient.cave",
+      "tick_delay": 6000,
+      "block_search_extent": 8,
+      "offset": 2.0
+    },
+    "sky_color": 8233727,
+    "fog_color": 12638463,
+    "water_fog_color": 329011
+  },
+  "features": [
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    []
+  ],
+  "has_precipitation": true,
+  "spawn_costs": {},
+  "spawners": {
+    "ambient": [],
+    "axolotls": [],
+    "creature": [],
+    "misc": [],
+    "monster": [
+      {
+        "type": "hbmspace:entity_mob_flesh_creeper",
+        "maxCount": 4,
+        "minCount": 4,
+        "weight": 10
+      }
+    ],
+    "underground_water_creature": [],
+    "water_ambient": [],
+    "water_creature": [
+      {
+        "type": "hbmspace:entity_scutterfish",
+        "maxCount": 4,
+        "minCount": 4,
+        "weight": 10
+      },
+      {
+        "type": "hbmspace:entity_siftereel",
+        "maxCount": 3,
+        "minCount": 1,
+        "weight": 10
+      },
+      {
+        "type": "hbmspace:entity_scuttlecrab",
+        "maxCount": 3,
+        "minCount": 1,
+        "weight": 4
+      }
+    ]
+  },
+  "temperature": 0.2
+}

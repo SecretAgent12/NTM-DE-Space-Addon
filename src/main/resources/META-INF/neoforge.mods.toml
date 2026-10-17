@@ -1,0 +1,51 @@
+modLoader = "javafml"
+loaderVersion = "[1,)"
+license = "LGPL-3.0-only"
+issueTrackerURL = "https://github.com/SecretAgent12/NTM-DE-Space-Addon/issues"
+
+[[mods]]
+modId = "hbmspace"
+# filled in from gradle.properties by processResources
+version = "${mod_version}"
+displayName = "NTM DE: Space"
+displayURL = "https://github.com/SecretAgent12/NTM-DE-Space-Addon"
+logoFile = "ntm_de_space_logo.png"
+description = '''NTM: Space for NTM: Decentralized Edition on Minecraft 1.21.1 / NeoForge: the official addon of NTM: Decentralized Edition, backported from movblock's 26.2 port of NTM: Space.
+
+Not affiliated with HbmMods, the NTM: Space authors or Warfactory - report bugs of this build to NTM DE: Space, not upstream.'''
+authors = "JamesH_2 and Mellow, movblock, SecretAgent12"
+credits = "JamesH_2 and Mellow and the NTM: Space community: creating NTM: Space. movblock: the Minecraft 26.2 addon port this build is based on. SecretAgent12: backport to Minecraft 1.21.1 / NeoForge for NTM: Decentralized Edition."
+displayTest = "IGNORE_ALL_VERSION"
+
+[[mixins]]
+config = "hbmspace-common.mixins.json"
+
+# backport: the exact core build this addon was compiled against; the core's addon API is not frozen yet
+[[dependencies.hbmspace]]
+modId = "hbm"
+type = "required"
+versionRange = "[${de_version}]"
+ordering = "AFTER"
+side = "BOTH"
+
+[[dependencies.hbmspace]]
+modId = "minecraft"
+type = "required"
+versionRange = "[1.21.1,1.21.2)"
+ordering = "NONE"
+side = "BOTH"
+
+[[dependencies.hbmspace]]
+modId = "neoforge"
+type = "required"
+versionRange = "[21.1.0,)"
+ordering = "NONE"
+side = "BOTH"
+
+# backport: Flywheel 1.0.x replaces CrankShaft (the 26.2 Flywheel port, mod id "crankshaft"), as in the core
+[[dependencies.hbmspace]]
+modId = "flywheel"
+type = "required"
+versionRange = "[1.0.0,2.0)"
+ordering = "AFTER"
+side = "CLIENT"

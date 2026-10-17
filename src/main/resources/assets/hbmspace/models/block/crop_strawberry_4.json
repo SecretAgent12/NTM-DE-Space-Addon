@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/crop",
+  "textures": {
+    "crop": "hbmspace:block/strawberry_4"
+  },
+  "render_type": "minecraft:cutout"
+}

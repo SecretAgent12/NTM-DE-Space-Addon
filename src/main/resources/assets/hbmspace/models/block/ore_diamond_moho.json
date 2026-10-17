@@ -1,0 +1,8 @@
+{
+  "parent": "hbmspace:block/celestial_ore",
+  "textures": {
+    "overlay": "hbmspace:block/ore_diamond",
+    "stone": "hbmspace:block/moho_stone"
+  },
+  "render_type": "minecraft:cutout"
+}

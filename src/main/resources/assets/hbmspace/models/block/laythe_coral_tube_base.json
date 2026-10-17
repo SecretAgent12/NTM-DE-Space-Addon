@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/block",
+  "textures": {
+    "coral": "hbmspace:block/laythe_coral.tube",
+    "particle": "hbmspace:block/laythe_coral.tube"
+  },
+  "render_type": "minecraft:cutout"
+}

@@ -1,0 +1,8 @@
+{
+  "parent": "hbmspace:block/celestial_ore",
+  "textures": {
+    "overlay": "hbmspace:block/ore_silicon",
+    "stone": "hbmspace:block/duna_rock"
+  },
+  "render_type": "minecraft:cutout"
+}

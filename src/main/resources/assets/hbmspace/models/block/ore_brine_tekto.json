@@ -1,0 +1,8 @@
+{
+  "parent": "hbmspace:block/celestial_ore",
+  "textures": {
+    "overlay": "hbmspace:block/ore_brine",
+    "stone": "hbm:block/basalt"
+  },
+  "render_type": "minecraft:cutout"
+}

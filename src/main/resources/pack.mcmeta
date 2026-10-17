@@ -1,0 +1,10 @@
+{
+  "pack": {
+    "description": "NTM: Space resources",
+    "pack_format": 34,
+    "supported_formats": [
+      34,
+      48
+    ]
+  }
+}

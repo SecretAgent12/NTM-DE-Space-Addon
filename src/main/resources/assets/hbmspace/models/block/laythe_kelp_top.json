@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cross",
+  "textures": {
+    "cross": "hbmspace:block/laythe_kelp_top"
+  },
+  "render_type": "minecraft:cutout"
+}

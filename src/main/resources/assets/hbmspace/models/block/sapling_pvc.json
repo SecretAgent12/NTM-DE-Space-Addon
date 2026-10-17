@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cross",
+  "textures": {
+    "cross": "hbmspace:block/sapling_pvc"
+  },
+  "render_type": "minecraft:cutout"
+}
