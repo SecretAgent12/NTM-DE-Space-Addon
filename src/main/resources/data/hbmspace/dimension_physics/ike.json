@@ -1,0 +1,9 @@
+{
+  "dimension": "hbmspace:ike",
+  "base_gravity": [
+    0.0,
+    -1.232,
+    0.0
+  ],
+  "base_pressure": 0.0
+}

@@ -1,0 +1,9 @@
+{
+  "dimension": "hbmspace:moho",
+  "base_gravity": [
+    0.0,
+    -3.025,
+    0.0
+  ],
+  "base_pressure": 0.0
+}

@@ -1,0 +1,9 @@
+{
+  "dimension": "hbmspace:dres",
+  "base_gravity": [
+    0.0,
+    -1.265,
+    0.0
+  ],
+  "base_pressure": 0.0
+}

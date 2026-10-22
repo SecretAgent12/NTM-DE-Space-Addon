@@ -1,0 +1,9 @@
+{
+  "dimension": "hbmspace:tekto",
+  "base_gravity": [
+    0.0,
+    -0.936,
+    0.0
+  ],
+  "base_pressure": 1.5
+}

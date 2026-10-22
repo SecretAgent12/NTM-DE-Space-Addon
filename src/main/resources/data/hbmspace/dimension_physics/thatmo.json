@@ -1,0 +1,9 @@
+{
+  "dimension": "hbmspace:thatmo",
+  "base_gravity": [
+    0.0,
+    -2.551,
+    0.0
+  ],
+  "base_pressure": 0.005
+}

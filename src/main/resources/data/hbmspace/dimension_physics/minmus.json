@@ -1,0 +1,9 @@
+{
+  "dimension": "hbmspace:minmus",
+  "base_gravity": [
+    0.0,
+    -0.55,
+    0.0
+  ],
+  "base_pressure": 0.0
+}

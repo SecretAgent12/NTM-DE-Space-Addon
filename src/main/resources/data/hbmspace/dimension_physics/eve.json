@@ -1,0 +1,9 @@
+{
+  "dimension": "hbmspace:eve",
+  "base_gravity": [
+    0.0,
+    -18.695,
+    0.0
+  ],
+  "base_pressure": 5.0
+}
