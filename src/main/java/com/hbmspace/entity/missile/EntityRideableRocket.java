@@ -189,6 +189,9 @@ public class EntityRideableRocket extends EntityMissileBaseNT implements IEntity
         }
 
         setState(RocketState.LANDING);
+        // backport-fix: BF-091 upright before the teleport: the copy in the target dimension is born with
+        // this rotation, and the client keeps the spawn rotation (90 from TRANSFER) until a full resync
+        setXRot(0);
 
         Destination destination = getDestination();
         if (destination == null) return;
@@ -248,6 +251,7 @@ public class EntityRideableRocket extends EntityMissileBaseNT implements IEntity
                 OrbitalStation.calculateTransferTime(distance, 10, getRocket().getThrust()));
         station.orbiting = from.body();
         station.target = to.body();
+        setXRot(90); // backport-fix: BF-091 lying down before the teleport, as TRANSFER keeps it
 
         int x = station.dX * OrbitalStation.STATION_SIZE + OrbitalStation.STATION_SIZE / 2;
         int y = 128;
