@@ -45,10 +45,15 @@ public final class CommandWeatherPlanetary {
 
     public static void register(CommandDispatcher<CommandSourceStack> dispatcher) {
         CommandNode<CommandSourceStack> weather = dispatcher.getRoot().getChild("weather");
+        // backport-fix: BF-136 another mod (Primal Winter) replaces or removes /weather: leave it alone
+        if (weather == null) return;
         for (Kind kind : Kind.values()) {
             CommandNode<CommandSourceStack> literal = weather.getChild(kind.literal);
+            if (literal == null || literal.getCommand() == null) continue; // backport-fix: BF-136
+            CommandNode<CommandSourceStack> timed = literal.getChild("duration");
+            if (timed == null || timed.getCommand() == null) continue; // backport-fix: BF-136
             Command<CommandSourceStack> vanilla = literal.getCommand();
-            Command<CommandSourceStack> vanillaTimed = literal.getChild("duration").getCommand();
+            Command<CommandSourceStack> vanillaTimed = timed.getCommand();
 
             dispatcher.register(
                     Commands.literal("weather")
