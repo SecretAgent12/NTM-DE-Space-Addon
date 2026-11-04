@@ -6400,6 +6400,8 @@ SPDX-License-Identifier = "LGPL-3.0-only"
 path = [
     "src/main/resources/com/hbmspace/**/container-sync.idx",
     "src/main/resources/data/hbmspace/dimension_physics/**",
+    "src/main/resources/data/minecraft/tags/item/stone_crafting_materials.json",
+    "src/main/resources/data/minecraft/tags/item/stone_tool_materials.json",
     "src/main/resources/data/hbmspace/neoforge/biome_modifier/add/meteorite.json",
     "src/main/resources/data/hbmspace/tags/worldgen/biome/is_celestial.json",
     "src/main/resources/data/hbmspace/worldgen/structure/spaceship.json",
