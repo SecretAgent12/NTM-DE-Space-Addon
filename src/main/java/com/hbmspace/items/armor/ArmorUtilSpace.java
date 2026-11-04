@@ -96,7 +96,8 @@ public final class ArmorUtilSpace {
     }
 
     private static boolean checkSpecialBreathing(Player player) {
-        if (player.isCreative()) return true;
+        // backport-fix: BF-137 spectators don't breathe either (26.x/1.7.10 checked creative only)
+        if (player.isCreative() || player.isSpectator()) return true;
 
         for (EquipmentSlot slot : ArmorUtil.ARMOR_SLOTS) {
             ItemStack stack = player.getItemBySlot(slot);
