@@ -158,12 +158,21 @@ tasks.register('syncDevMods') {
 }
 tasks.matching { it.name == 'runClient' || it.name == 'prepareClientRun' }.configureEach { dependsOn 'syncDevMods' }
 
+// The core versions this build loads with: its beta and that beta's hotfixes. de_version is the core build
+// it compiles against (1.0.0-beta.14 or 1.0.0-beta.14-hotfix); the range is [1.0.0-beta.14,1.0.0-beta.15),
+// which in maven order holds 1.0.0-beta.14, -hotfix, -hotfix.2, ... and nothing of beta.15. A version
+// without a beta number (a release) is pinned exactly.
+def deVersionRange = { String v ->
+    def m = v =~ /^(.*-beta\.)(\d+)(?:-.*)?$/
+    (m.matches() ? "[${m.group(1)}${m.group(2)},${m.group(1)}${(m.group(2) as int) + 1})" : "[${v}]").toString()
+}
+
 // The versions go into neoforge.mods.toml as text, as in the core
 tasks.named('processResources') {
-    def props = [mod_version: project.mod_version, de_version: project.de_version]
+    def props = [mod_version: project.mod_version, de_version_range: deVersionRange(project.de_version)]
     inputs.properties props
     filesMatching('META-INF/neoforge.mods.toml') {
-        filter { String line -> line.replace('${mod_version}', props.mod_version).replace('${de_version}', props.de_version) }
+        filter { String line -> line.replace('${mod_version}', props.mod_version).replace('${de_version_range}', props.de_version_range) }
     }
 }
 

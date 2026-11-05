@@ -20,11 +20,12 @@ displayTest = "IGNORE_ALL_VERSION"
 [[mixins]]
 config = "hbmspace-common.mixins.json"
 
-# backport: the exact core build this addon was compiled against; the core's addon API is not frozen yet
+# backport: the core beta this addon was compiled against and that beta's hotfixes (build.gradle,
+# deVersionRange); the core's addon API is not frozen yet
 [[dependencies.hbmspace]]
 modId = "hbm"
 type = "required"
-versionRange = "[${de_version}]"
+versionRange = "${de_version_range}"
 ordering = "AFTER"
 side = "BOTH"
 

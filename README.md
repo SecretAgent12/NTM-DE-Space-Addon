@@ -15,8 +15,9 @@ not upstream.
 ## Requirements
 
 - Minecraft 1.21.1, NeoForge 21.1
-- NTM: Decentralized Edition, **exactly** the version this build is made for (`de_version` in
-  `gradle.properties`). Each Space version is built for one NTM: DE version and will not load with another.
+- NTM: Decentralized Edition, the version this build is made for (`de_version` in `gradle.properties`) or one
+  of its hotfixes: a Space build for 1.0.0-beta.14 also loads with 1.0.0-beta.14-hotfix, but not with
+  1.0.0-beta.15.
 
 ## Building
 
