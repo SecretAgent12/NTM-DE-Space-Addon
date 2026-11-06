@@ -4,6 +4,7 @@
   "package": "com.hbmspace.mixin",
   "mixins": [
     "MixinMinecraftServer",
+    "MixinRecipeManager",
     "MixinJoinGreeting",
     "MixinBlockItem",
     "MixinBlockMultiblockCore",
